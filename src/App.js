@@ -1,26 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import Navbar from './components/navbar';
+import Footer from './components/footer';
+import Index2 from './components/index2';
+import InfoCard from './components/infoCard';
+import InfoPlanets from './components/infoPlanets';
+import injectContext from './store/appContext';
 import './App.css';
 
-function App() {
+const App = props => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Navbar />
+        <Switch>        
+          <Route exact path="/" component={Index2} />
+          <Route exact path="/infocard/:id" component={InfoCard} />
+          <Route exact path="/infoplanets/:id" component={InfoPlanets} />
+        </Switch>       
+        <Footer />
+      </BrowserRouter>
+    </>
+
   );
 }
 
-export default App;
+export default injectContext(App);
